@@ -1,8 +1,8 @@
 const express =  require("express");
-// const path = require("path")
+const path = require("path")
 const app  = new express();
 app.use(express.static("public"));
-app.use(express.static("path"));
+// app.use(express.static("path"));
 app.listen(4000,()=>{
   console.log("4000 port");
 })
