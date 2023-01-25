@@ -29,3 +29,17 @@ app.get("/post", (req, res) => {
   // res.sendFile(path.resolve(__dirname, "path/post.ejs"));
   res.render("post");
 });
+
+app.get("/user/:id",(req,res)=>{
+  //If we have database, we can use the below coding.
+  // var id = req.parameter.id;
+  // user = db.getProfileUser(id);
+  const user = {
+    id: req.params.id,
+    name: "Wei Xiao",
+    email: "123@gmail.com",
+    stack: "Mern",
+    hobby: ["Swimming", "Singing"]
+  };
+  res.render("user",{user})
+})
