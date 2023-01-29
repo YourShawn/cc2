@@ -49,6 +49,6 @@ CREATE TRIGGER upd_check BEFORE UPDATE ON account
 delimiter ;
 --
 update account
-set amount=-200 where acct_num=97;
+set amount=200 where acct_num=97;
 --
 -- DROP TRIGGER test.ins_sum;
