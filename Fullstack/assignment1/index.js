@@ -19,3 +19,9 @@ app.get("/home", (req, res) => {
 app.get("/user", (req, res) => {
   res.render("user");
 });
+app.get("/g",(req,res)=>{
+  res.render("g_layout");
+});
+app.get("/g2", (req, res) => {
+  res.render("g2_layout");
+});
