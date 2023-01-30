@@ -201,7 +201,7 @@ background-color: #7098da;
   grid-template-areas: 
   " . "
   " b "
-  " . "
+  " pg "
   " . ";
   grid-template-rows: 50px auto;
   height: 1000px;
