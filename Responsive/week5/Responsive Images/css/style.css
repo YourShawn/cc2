@@ -1,0 +1,38 @@
+img{
+  width:100%;
+  height:auto;
+  border-radius: 10px;
+}
+header{
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+}
+
+h1{
+  text-align: center;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.figure-grp{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 720px) {
+  header{
+  display: inline-block;
+ }
+ .figure-grp{
+  display: inline-block;
+}
+}
+
+@media screen and (max-width: 900px) {
+  header{
+  display: inline-block;
+ }
+}
