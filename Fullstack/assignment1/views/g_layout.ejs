@@ -23,6 +23,14 @@
     </div>
     <div class="gtestPage">
       <h4>G Page</h4>
+       <form action="/driverInfo/find" method="get">
+         <div class="mb-3">
+           <label for="licenseNo" class="form-label">License No:</label>
+           <input type="text" class="form-control" id="licenseNo" name="licenseNo" required>
+         </div>
+         <hr>
+         <button type="submit" class="btn btn-primary">Search</button>
+       </form>
     </div>
   </div>
   <%- include("layouts/footer.ejs") -%>

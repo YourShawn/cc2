@@ -16,7 +16,9 @@
   padding-bottom:10px;
 }
 .gtestPage{
-  height: 720px;
+  height: 820px;
+  width:50%;
+  margin: 0 auto;
 }
 
 #homeBanner{
@@ -48,4 +50,7 @@
 }
 #colorgray{
   color: gray;
+}
+#main_login{
+  height:750px;
 }
