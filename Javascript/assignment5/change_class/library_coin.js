@@ -1,15 +1,22 @@
 "use strict";
 
 const Coins = {
-  quarters: 0,
-  dimes: 0,
-  nickels: 0,
-  cents: 0,
-  constructor(quarters, dimes, nickels, cents){
+  quarters,
+  dimes,
+  nickels,
+  cents,
+
+  constructor(quarters, dimes, nickels, cents) {
     this.quarters = quarters;
     this.dimes = dimes;
     this.nickels = nickels;
     this.cents = cents;
+  },
+  constructor() {
+    this.quarters = 0;
+    this.dimes = 0;
+    this.nickels = 0;
+    this.cents = 0;
   },
 
   makeChange(cions_num) {
@@ -33,4 +40,4 @@ const Coins = {
   },
 };
 //Export the Object. IMPORTANT
-export { coins };
+export { Coins };
