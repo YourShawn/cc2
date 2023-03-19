@@ -3,17 +3,26 @@
     <li class="nav-item">
       <a class="nav-link" aria-current="page" href="/home">Home</a>
     </li>
+    
+    <% if(userType!= null && userType == "Driver"){%>
     <li class="nav-item">
       <a class="nav-link" href="/user">G2</a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link" href="/g2">G2</a>
-    </li> -->
     <li class="nav-item">
       <a class="nav-link" href="/g">G</a>
     </li>
+    <% } %>
+
+    <% if(!loggedIn){%>
      <li class="nav-item">
-       <a class="nav-link" href="/admin_login">Admin</a>
+       <a class="nav-link" href="/admin_login">Login</a>
      </li>
+     <% }%>
+
+    <% if(loggedIn){%>
+     <li class="nav-item">
+       <a class="nav-link" href="/logout">Logout</a>
+     </li>
+     <% }%>
   </ul>
 </div>

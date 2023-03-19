@@ -1,24 +1,11 @@
 const DriverInfo = require("../models/DriverInfo");
-const express = require("express");
-const app = new express();
-
-//Parameters validation middleware. For update driver information
-const driverInfoUpdateMiddleware = (req,res,next)=>{
-  let { make, model, year, platNo } = req.body;
-     //Check the parameters passed by browser.
-     if (make == "" || model == "" || year == "" || platNo == "") {
-       var errorMessage = "Require Car's information parameters";
-       res.render("error", { errorMessage });
-       return;
-     }
-  next();
-}
-app.use("/driverInfo/update", driverInfoUpdateMiddleware);
-
+const crypto = require("crypto");
 module.exports = async (req, res) => {
+   const userId = req.session.userId;
+  // const userId = "6412506409233aad173b8ed3";
   let { make, model, year, platNo } = req.body;
   DriverInfo.findByIdAndUpdate(
-    req.body._id,
+    userId,
     {
       $set: {
         carDetails: {
@@ -32,10 +19,24 @@ module.exports = async (req, res) => {
     (error, result) => {
       if (error) {
         throw error;
-      } else {
-        console.log("Result", result);
       }
+      if(!result){
+        res.redirect("/home");
+        return;
+      }
+      //Setting the new value to variables.
+      result.carDetails.make = make;
+      result.carDetails.model = model;
+      result.carDetails.year = year;
+      result.carDetails.platNo = platNo;
+        var cypherKey = "mySecretKey";
+        var decipher = crypto.createDecipher("aes-256-cbc", cypherKey);
+        var dec = decipher.update(result.licenseNo, "hex", "utf8");
+        dec += decipher.final("utf8");
+        result.licenseNo = dec;
+      res.render("g_layout_find", { driverInfoFind: result });
+      return;
     }
   );
-  res.redirect("/g");
+  
 };

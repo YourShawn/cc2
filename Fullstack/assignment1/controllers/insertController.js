@@ -1,51 +1,58 @@
 const DriverInfo = require("../models/DriverInfo");
-const express = require("express");
-const app = new express();
-
-//Parameters validation middleware. For insert information
-const driverInfoInsertMiddleware = (req,res,next)=>{
-   let {firstName, lastName, age, licenseNo } =
-     req.body;
-     //Check the parameters passed by browser.
-     if (
-       firstName == "" ||
-       lastName == "" ||
-       age == "" ||
-       licenseNo == ""
-     ) {
-       var errorMessage = "All parameters are required";
-       res.render("error", { errorMessage });
-       return;
-     }
-  next();
-}
-
-app.use("/store/driverInfo", driverInfoInsertMiddleware);
-module.exports = async (req, res) => {
-  var query = { licenseNo: req.body.licenseNo };
-  const driverInfoFind = await DriverInfo.findOne(query);
-  if (driverInfoFind != null) {
-    var errorMessage = "User is exsiting";
-    res.render("error", { errorMessage });
+// const bcrypt = require("bcrypt");
+var crypto = require("crypto");
+const { encrypt, decrypt } = require("../components/cryptComponent");
+module.exports =  (req, res) => {
+  console.log(req.session);
+  const userId = req.session.userId;
+  // const userId = "6412506409233aad173b8ed3";
+  // var query = { licenseNo: req.body.licenseNo };
+  if (!userId) {
+    //Please login
+    res.render("admin_login", { errorMessage: "Please login" });
     return;
   }
+  console.log("insert driver infos", req.body);
   let { make, model, year, platNo, firstName, lastName, age, licenseNo } =
     req.body;
-  DriverInfo.create(
+  //crypt
+  // var cypherKey = "mySecretKey";
+  // var cipher = crypto.createCipher("aes-256-cbc", cypherKey);
+  // var crypted = cipher.update(licenseNo, "utf8", "hex");
+  // crypted += cipher.final("hex");
+  licenseNo = encrypt(licenseNo);
+  DriverInfo.findByIdAndUpdate(
+    userId,
     {
-      firstName,
-      lastName,
-      age,
-      licenseNo,
-      carDetails: {
-        make,
-        model,
-        year,
-        platNo,
+      $set: {
+        firstName,
+        lastName,
+        age,
+        licenseNo,
+        carDetails: {
+          make,
+          model,
+          year,
+          platNo,
+        },
       },
     },
-    (error, driverInfo) => {
-      res.redirect("/");
+    (error, result) => {
+      console.log("Result update: ", result);
+      if (error) {
+        throw error;
+      }
+      DriverInfo.findById(result._id,(error,findUserAfterUpdate)=>{
+        if(error){
+          console.log("Render to home");
+          res.render("home");
+          return;
+        }
+        findUserAfterUpdate.licenseNo = decrypt(findUserAfterUpdate.licenseNo);
+         console.log("findUserAfterUpdate : ", findUserAfterUpdate);
+         res.render("g_layout_find", { driverInfoFind: findUserAfterUpdate });
+         return;
+      });
     }
   );
 };
