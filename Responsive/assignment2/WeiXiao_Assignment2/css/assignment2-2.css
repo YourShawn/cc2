@@ -1,0 +1,162 @@
+
+
+body{
+  font-size: 2vw;
+}
+.textContent{
+  font-size: 1vb;
+}
+ul{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
+#container{
+  display: grid;
+  width:90%;
+  grid-template-areas: 
+  'header header header'
+  "nav nav nav"
+  "main main side"
+  "main main side"
+  "footer footer footer"
+  ;
+}
+#header{grid-area: header;}
+#navbar{grid-area: nav;}
+#main{grid-area: main;}
+#side{grid-area: side;}
+#footer{grid-area: footer;}
+
+#header{
+  background-color: #cbf1f5;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar{
+  background-color: #e3fdfd;
+  height:50px;
+  width:100%;
+  display: flex;
+  font-size: 20px;
+}
+
+#navbar a {
+  display: flex;
+  width: 14%;
+   align-items: center;
+  justify-content: center;
+}
+
+
+#main{
+  width:80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+#side{
+  display: flex;
+  flex-flow: column;
+}
+.textContent{
+  padding:10px;
+}
+.cycle{
+  width: 92%;
+  border-radius:50px;
+  border-style: ridge;
+  box-sizing: border-box;
+  margin:10px;
+}
+
+
+.sideTitle{
+  background-color: #e3fdfd;
+  width:100%;
+  font-size: 2vw;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+.sideContent{
+  display: inline-block;
+  width:80%;
+  font-size: 1vw;
+}
+.sideIcon{
+  display: inline-block;
+  width:100%;
+  margin-bottom:40px;
+}
+
+#footer{
+  height:30px;
+  width:100%;
+  text-align: center;
+  font-size:medium;
+  margin-top: 10px;
+  background-color: rgb(234, 234, 234);
+  padding-top: 12px;
+}
+
+@media screen and (max-width: 768px) {
+  
+#main{
+  width:80%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+.cycle{
+  width: 100%;
+}
+  
+#side{
+  display: block;
+}
+.sideTitle{
+  background-color:#cbf1f5;
+}
+.border{
+  width: 100%;
+}
+a{
+  font-size: 10px;
+}
+#footer{
+  height: 20px;
+  padding-top: 0px;
+}
+.sideTitle{
+  width: 100%;
+}
+}
+
+@media screen and (max-width: 540px) {
+
+  #container{
+  width:80%;
+  display: grid;
+  grid-template-areas: 
+  'header '
+  "nav"
+  "side"
+  "main"
+  "footer"
+  ;
+}
+.sideTitle{
+  width:100%;
+  margin-top: 10px;
+}
+.sideIcon{
+  margin-bottom: 4px;
+}
+}

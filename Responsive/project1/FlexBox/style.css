@@ -1,0 +1,101 @@
+
+main, header, section, aside, footer {
+    margin: 0;
+}
+
+main {
+    background: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header {
+    background: #03a9f4;
+    height: 100px;
+    width: 100%;
+}
+
+.hero {
+    background: #d22b1f;
+    height: 100px;
+    width: 100%;
+}
+
+.wrapper{
+        display: flex;  
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+.content {
+    background: #129a22;
+    height: 200px;
+     width: 100%;
+}
+
+.sidebar {
+    border: 1px solid #000000;
+    background: #673ab7;
+    height: 100px;
+    width: 100%;
+}
+
+.footer {
+    border: 1px solid #000000;
+    background: #616161;
+    height: 100px;
+    width: 100%;
+}
+
+
+@media screen and (min-width: 768px) {
+    
+
+    .content {
+        background: #129a22;
+        width: 70%;
+    }
+
+    .sidebar {
+        border: none;
+        background: #673ab7;
+        height: 200px;
+        width: 30%;
+    }
+
+}
+
+
+@media screen and (min-width: 992px) {
+
+    .header {
+        background: #03a9f4;
+        height: 100px;
+        width: 100%;
+    }
+    .hero {
+        background: #d22b1f;
+        height: 100px;
+        width: 90%;
+        margin:0 auto;
+    }
+    
+    .wrapper{
+        display: flex; 
+        width: 90%;
+        margin:0 auto;
+    }
+
+    .content {
+        background: #129a22;
+        width: 70%;
+    }
+
+    .sidebar {
+        border: none;
+        background: #673ab7;
+        height: 200px;
+        width: 30%;
+    }
+
+}

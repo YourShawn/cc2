@@ -1,0 +1,170 @@
+
+/*
+#71c9ce
+#a6e3e9
+#cbf1f5
+#e3fdfd
+*/
+body{
+  font-size: 2vw;
+}
+.textContent{
+  font-size: 1vb;
+}
+ul{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
+#container{
+  display: flex;
+  flex-wrap: wrap;
+  width:90%;
+  margin:0 auto;
+}
+#mainContainer{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  margin:0 auto;
+}
+#header{
+  background-color: #cbf1f5;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar{
+  background-color: #e3fdfd;
+  height:50px;
+  width:100%;
+  display: flex;
+  font-size: 20px;
+}
+
+#navbar a {
+  display: flex;
+  width: 14%;
+   align-items: center;
+  justify-content: center;
+}
+
+
+#main{
+  width:80%;
+  display: flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  align-items: center;
+ 
+}
+.border{
+  width: 40%;
+}
+.textContent{
+  padding:10px;
+}
+.cycle{
+  width: 92%;
+  border-radius:50px;
+  border-style: ridge;
+  box-sizing: border-box;
+  margin:10px;
+  min-height:360px;
+  max-height: 400px;
+}
+#side{
+  width:20%;
+  display: flex;
+  flex-wrap: inherit;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.sideTitle{
+  background-color: #e3fdfd;
+  width:100%;
+  font-size: 2vw;
+  border-radius: 4px;
+}
+.sideContent{
+  display: inline-block;
+  width:80%;
+  font-size: 1vw;
+}
+.sideIcon{
+  display: inline-block;
+  width:100%;
+  margin-bottom:40px;
+}
+
+#footer{
+  height:50px;
+  width:100%;
+  text-align: center;
+  font-size:medium;
+  margin-top: 10px;
+  background-color: rgb(234, 234, 234);
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  
+#main{
+  width:80%;
+  flex-flow: column;
+}
+.cycle{
+  min-height: 200px;
+}
+
+#side{
+  display: block;
+}
+.sideTitle{
+  background-color:#cbf1f5;
+}
+.border{
+  width: 100%;
+}
+a{
+  font-size: 10px;
+}
+#footer{
+  height: 20px;
+  padding-top: 0px;
+}
+.sideTitle{
+  width: 100%;
+}
+}
+
+@media screen and (max-width: 540px) {
+#mainContainer{
+  flex-flow: column-reverse;
+}
+
+.sideTitle{
+  width: 100%;
+}
+#main{
+  width:100%;
+}
+#side{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sideIcon{
+  display: inline-block;
+  width:100%;
+  margin-bottom:10px;
+}
+
+}
