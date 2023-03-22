@@ -28,9 +28,10 @@ public class MainActivity extends AppCompatActivity {
         myDataset.add("Jeremy");
         myDataset.add("Om");
         myDataset.add("Shawn");
+        myDataset.add("Wei Xiao");
         mAdapter = new MyAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);
-
+        System.out.println("This is lab 4 of Wei Xiao's");
 
     }
 }
