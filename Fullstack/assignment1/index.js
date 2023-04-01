@@ -26,7 +26,12 @@ app.use(
 global.loggedIn = null;
 app.use("*", (req, res, next) => {
   loggedIn = req.session.userId;
-  console.log("* * *", loggedIn, global.userType);
+  console.log("* * * User is:", loggedIn, global.userType);
+  console.log("* * * Url is:", req.baseUrl + req.path);
+  console.log("* * * Query Paramters are:", req.query);
+  console.log("* * * Body Paramsters are:", req.body);
+  console.log("* * * * * * * * * * * * * * *");
+  console.log("* * * * * * * * * * * * * * *");
    next(); 
 });
 
@@ -66,6 +71,9 @@ app.get("/admin_register", (req, res) => {
 });
 
 
+
+
+
 //Controllers
 const insertController = require("./controllers/insertController");
 const updateController = require("./controllers/updateController");
@@ -75,6 +83,14 @@ const userLoginController = require("./controllers/userLoginController");
 const findG2LicenseInfoController = require("./controllers/findG2LicenseInfoController");
 const findGLicenseInfoController = require("./controllers/findGLicenseInfoController");
 const logoutController = require("./controllers/logoutController");
+const appointmentSaveController = require("./controllers/appointmentSaveController");
+const appointmentRouteController = require("./controllers/appointmentRouteController");
+const driverAppointmentRouteInfoController = require("./controllers/driverAppointmentRouteInfoController");
+const appointmentFindController = require("./controllers/appointmentFindController");
+const appointmentUpdateController = require("./controllers/appointmentUpdateController");
+const appointmentFindControllerAjax = require("./controllers/appointmentFindControllerAjax");
+const adminAppointmentFindController = require("./controllers/adminAppointmentFindController");
+const appointmentCancelController = require("./controllers/appointmentCancelController");
 
 //Middlewares
 const passwordCheckMiddleware = require("./middlewares/passwordCheckMiddleware");
@@ -82,6 +98,8 @@ const driverInfoUpdateMiddleware = require("./middlewares/driverInfoUpdateMiddle
 const driverInfoInsertMiddleware = require("./middlewares/driverInfoInsertMiddleware");
 const userLoginCheckMiddleware = require("./middlewares/userLoginCheckMiddleware");
 const authMiddleware = require("./middlewares/authMiddleware");
+const authAdminMiddleware = require("./middlewares/authAdminMiddleware");
+const appointmentSaveMiddleware = require("./middlewares/appointmentSaveMiddleware");
 
 
 app.post("/store/driverInfo",driverInfoInsertMiddleware, insertController);
@@ -90,9 +108,35 @@ app.get("/driverInfo/find", findController);
 app.post("/userInfo/register",passwordCheckMiddleware, userInsertController);
 app.post("/userInfo/login", userLoginCheckMiddleware, userLoginController);
 app.get("/user",authMiddleware, findG2LicenseInfoController);
+// app.get("/user", authMiddleware, driverAppointmentRouteInfoController);
 app.get("/g",authMiddleware, findGLicenseInfoController);
 app.get("/logout", logoutController);
+app.get("/booking", authMiddleware, driverAppointmentRouteInfoController);
 
+app.get("/admin_appointment", authAdminMiddleware, appointmentRouteController);
+app.post(
+  "/admin/save_appointment",
+  authAdminMiddleware,
+  appointmentSaveMiddleware,
+  appointmentSaveController
+);
+app.post("/driver/g2_appointment", authMiddleware, appointmentFindController);
+app.post(
+  "/driver/book_appointment",
+  authMiddleware,
+  appointmentUpdateController
+);
+app.get(
+  "/admin/find_appointment",
+  authAdminMiddleware,
+  adminAppointmentFindController
+);
+app.post(
+  "/driver/cancelAppointment",
+  authMiddleware,
+  appointmentCancelController
+);
 
+app.get("/findAppointmentDayTime",authAdminMiddleware, appointmentFindControllerAjax);
 
 app.use((req,res)=>res.render("404_page"));

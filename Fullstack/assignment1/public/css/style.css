@@ -1,6 +1,6 @@
 
 #main{
-  // height:760px;
+  min-height:760px;
   width:90%;
   margin: 0 auto;
 }
@@ -52,5 +52,18 @@
   color: gray;
 }
 #main_login{
-  height:750px;
+  min-height:750px;
+}
+#main_booking{
+  min-height: 750px;
+}
+#warnFadeOutInput :hover{
+  // animation: fadeOut 2s forwards;
+  // animation-delay: 2s;
+  opacity: 0.1;
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
 }

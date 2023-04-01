@@ -1,5 +1,7 @@
 const DriverInfo = require("../models/DriverInfo");
 const crypto = require("crypto");
+const { decrypt } = require("../components/cryptComponent");
+
 module.exports = async (req, res) => {
    const userId = req.session.userId;
   // const userId = "6412506409233aad173b8ed3";
@@ -29,11 +31,7 @@ module.exports = async (req, res) => {
       result.carDetails.model = model;
       result.carDetails.year = year;
       result.carDetails.platNo = platNo;
-        var cypherKey = "mySecretKey";
-        var decipher = crypto.createDecipher("aes-256-cbc", cypherKey);
-        var dec = decipher.update(result.licenseNo, "hex", "utf8");
-        dec += decipher.final("utf8");
-        result.licenseNo = dec;
+      result.licenseNo = decrypt(result.licenseNo);
       res.render("g_layout_find", { driverInfoFind: result });
       return;
     }

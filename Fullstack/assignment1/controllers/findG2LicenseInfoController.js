@@ -26,8 +26,7 @@ module.exports = (req, res) => {
     }
     console.log("Found driver infomations");
     findUser.licenseNo = decrypt(findUser.licenseNo);
-    res.render("g_layout_find", { driverInfoFind: findUser });
-    return;
+    return res.render("g_layout_find", { driverInfoFind: findUser });
   });
  
 };
