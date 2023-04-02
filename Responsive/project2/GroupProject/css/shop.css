@@ -1,0 +1,130 @@
+
+a{
+    text-decoration: none;
+}
+
+.small{
+    font-size: 10px;
+}
+
+#container{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    min-width: 400px;
+}
+#content{
+    min-height: 750px;
+    // background-color:aquamarine;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2px;
+    row-gap: 2px;
+}
+#selection{
+    min-height: 750px;
+    background-color:#eee;
+    padding-top: 20px;
+    padding-left: 4px;
+}
+
+.products{
+    min-height: 380px;
+   
+    background-color: #f9f7f7;
+    border-radius: 10px;
+    border: solid 1px;
+}
+.productsImg{
+    min-height: 40%;
+    width: 100%;
+    // background-image: url("../img/bike1.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+    border-radius: 10px;
+}
+
+.img1{
+    width: 100%;
+    height: 70%;
+    border-radius: 10px;
+}
+input[type=checkbox]{
+    display: inline-block;
+}
+.searchText{
+    display: inline-block;
+    font-size: 10px;
+}
+.searchBtn{
+    width: 100px;
+    border-radius: 2px;
+    background-color: antiquewhite;
+    // text-align: center;
+    margin: 0 auto;
+}
+.imgTst1,.imgTst2,.imgTst3,.imgTst4,.imgTst5{
+    transition: 1s;
+}
+
+.productsTsf1:hover .imgTst1{
+    transform: scale(1.2, 1);
+}
+.productsTsf2:hover .imgTst2{
+    transform: rotate(0.1turn);
+}
+
+.productsTsf3:hover .imgTst3{
+    transform: skew(8deg, 8deg);
+}
+.productsTsf4:hover .imgTst4{
+    transform: scale(1, 1.2);
+}
+.buyButton{
+    width: 50%;
+    height: 30px;
+}
+
+
+
+/* Break point 2: */
+@media all and (max-width: 670px){    
+ 
+#container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "selection"
+    "content";
+}
+#content{
+    grid-area: content;
+}
+#selection{
+    grid-area: selection;
+}
+#content{
+    min-height: 750px;
+    // background-color:aquamarine;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+}
+.products{
+    min-height: 540px;
+   
+    background-color: #f9f7f7;
+    border-radius: 10px;
+    border: solid 1px;
+}
+#selection{
+    min-height: 80px;
+}
+.selectionCheck{
+    display: inline-block;
+}
+.btnContainer{
+    margin-left:10px;
+}
+
+}
