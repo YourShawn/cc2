@@ -83,8 +83,19 @@ input[type=checkbox]{
 .buyButton{
     width: 50%;
     height: 30px;
+    margin-bottom:10px;
 }
 
+/* Break point 2: */
+@media all and (max-width: 934px){    
+#content{
+    min-height: 750px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2px;
+    row-gap: 2px;
+}
+}
 
 
 /* Break point 2: */
