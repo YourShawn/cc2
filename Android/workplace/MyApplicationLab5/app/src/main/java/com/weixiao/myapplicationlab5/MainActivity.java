@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Cellphone cellphone1 = new Cellphone("iphone","Cheep",12.00);
-        Cellphone cellphone2 = new Cellphone("iphone","Iphone",13.00);
-        Cellphone cellphone3 = new Cellphone("iphone","RedMi",14.00);
+        Cellphone cellphone2 = new Cellphone("galaxy","Iphone",13.00);
+        Cellphone cellphone3 = new Cellphone("pixel","RedMi",14.00);
         cellphoneList.add(cellphone1);
         cellphoneList.add(cellphone2);
         cellphoneList.add(cellphone3);
