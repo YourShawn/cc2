@@ -23,8 +23,6 @@ module.exports = async  (req,res)=>{
     const findQuery = {
       dateTime: req.query.dateTime,
     };
-    const findBo = await AppointmentInfo.find(findQuery);
-    console.log("Find Date is: ", findBo);
 
       const dateList = await AppointmentInfo.find(findQuery);
       console.log("Find Date is: ", dateList);

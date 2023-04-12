@@ -6,6 +6,11 @@ const BlogPostSchema = new Schema({
   title: String,
   body: String,
   username: String,
+  userId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:"User",
+    required:true,
+  },
   datePosted:{
     date: Date
   },
