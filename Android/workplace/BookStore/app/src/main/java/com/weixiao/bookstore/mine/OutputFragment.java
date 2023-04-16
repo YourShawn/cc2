@@ -47,6 +47,11 @@ public class OutputFragment extends BaseFragment implements View.OnClickListener
         return R.layout.book_mine_out;
     }
 
+    @Override
+    protected void refreshData() {
+
+    }
+
     private void setValue(){
         name.setText(getArguments().getString("name"));
         email.setText(getArguments().getString("email"));

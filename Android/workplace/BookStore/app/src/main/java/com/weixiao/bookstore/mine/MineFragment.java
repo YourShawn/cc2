@@ -25,6 +25,10 @@ public class MineFragment extends BaseFragment {
         return R.layout.book_mine;
     }
 
+    @Override
+    protected void refreshData() {
+
+    }
 
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

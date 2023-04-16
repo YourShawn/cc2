@@ -1,5 +1,6 @@
 package com.weixiao.bookstore;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ public abstract class BaseFragment extends Fragment {
     protected View contentView;
     protected abstract void initView();
     protected abstract int getLayoutId();
+    protected abstract void refreshData();
 
     @Nullable
     @Override

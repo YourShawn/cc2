@@ -1,5 +1,6 @@
 package com.weixiao.bookstore;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,6 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.weixiao.bookstore.activities.BaseActivity;
 import com.weixiao.bookstore.adapters.BookAdapter;
@@ -19,13 +25,19 @@ import com.weixiao.bookstore.mine.MineFragment;
 import com.weixiao.bookstore.mine.OutputFragment;
 import com.weixiao.bookstore.model.Book;
 import com.weixiao.bookstore.model.BookSingleton;
+import com.weixiao.bookstore.mysql.MysqlConnection;
 import com.weixiao.bookstore.shopping.ShoppingFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    String TAG = "Api test";
     BookSingleton bookSingleton;
+    Context context ;
     List<Book> bookList = new ArrayList<>();
     BookAdapter bookAdapter;
     RecyclerView recyclerView;
@@ -51,6 +63,24 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_frame,fragmentList.get(0))
                 .commit();
+        String url = "http://10.0.2.2:4000/testProducts";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i(TAG, "onResponse: "+response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "onErrorResponse: "+error.toString());
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
+
+//        MysqlConnection mysqlConnection = new MysqlConnection();
+//        int userSize = mysqlConnection.getUserSize();
+//        Log.e(TAG, "initViews: "+userSize);
     }
 
     @Override
@@ -69,6 +99,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         switch (item.getItemId()){
             case R.id.bottom_home:
                 switchFragment(0);
+
                 break;
             case R.id.bottom_shopping:
                 Log.e("test", "onNavigationItemSelected:bottom_shopping "+item.getItemId());
@@ -94,6 +125,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         fragmentTransaction.hide(fragmentList.get(lastFragmentIndex))
                 .commitAllowingStateLoss();
         lastFragmentIndex = to;
+        BaseFragment fragmentById = (BaseFragment)getSupportFragmentManager().findFragmentById(R.id.main_frame);
+        fragmentById.refreshData();
     }
 
     @Override
@@ -104,37 +137,45 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
 
     public void loadShopping(View view){
-        setContentView(R.layout.book_shopping);
-
-        bookSingleton = BookSingleton.getBookSingleton();
-        bookList = bookSingleton.getBookList();
-        bookAdapter = new BookAdapter(bookList);
-
-        recyclerView = findViewById(R.id.book_shopping);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        recyclerView.setAdapter(bookAdapter);
-
-
-    }
+        context = this;
+//        setContentView(R.layout.book_shopping);
+//        BookSingleton bookSingleton = new BookSingleton(this);
+//        bookSingleton = BookSingleton.getBookSingleton(this);
+//        bookList = bookSingleton.getBookList();
+//        bookAdapter = new BookAdapter(bookList);
+//
+//        recyclerView = findViewById(R.id.book_shopping);
+//        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+//        recyclerView.setAdapter(bookAdapter);
 
 
-    public void loadHomeFragment(View view){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.hide(new OutputFragment());
-        fragmentTransaction.replace(R.id.main_frame,new HomeFragment())
-                .commit();
-//        FragmentManager fragmentManager = getFragmentManager();
-//        android.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.setReorderingAllowed(true);
-////        MainActivity bdf = new MainActivity();
-//        ft.replace(R.id.inputFrag, MineFragment.class,null);
-//        ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//        ft.addToBackStack(null);
-//        ft.commit();
+        String url = "http://10.0.2.2:4000/testProducts";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i(TAG, "onResponse: "+response.toString());
+                try {
+                    setContentView(R.layout.book_shopping);
+                    List<Book> bookList1 = (List<Book>) response.getJSONArray("data");
+                    bookAdapter = new BookAdapter(bookList1);
 
-//        FragmentActivity activity = getActivity();
-//        new Intent(activity,)
+                    recyclerView = findViewById(R.id.book_shopping);
+                    recyclerView.setLayoutManager(new GridLayoutManager(context,2));
+                    recyclerView.setAdapter(bookAdapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "onErrorResponse: "+error);
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(jsonObjectRequest);
+
+
     }
 
 }

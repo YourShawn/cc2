@@ -81,6 +81,11 @@ public class InputFragment extends BaseFragment {
         return R.layout.book_mine_in;
     }
 
+    @Override
+    protected void refreshData() {
+
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
