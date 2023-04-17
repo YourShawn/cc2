@@ -56,7 +56,7 @@ public class ShoppingFragment extends BaseFragment {
             public void onResponse(JSONObject response) {
                 Log.i(TAG, "onResponse: "+response.toString());
                 try {
-                    JSONArray data = response.getJSONArray("data");
+                    JSONArray data = response.getJSONArray("productList");
                     Log.e(TAG, "onResponse *******: "+data );
 //                    List<Book> bookList1 = (List<Book>) response.getJSONArray("data");
                     List<Book>list=new ArrayList<>();
@@ -85,6 +85,7 @@ public class ShoppingFragment extends BaseFragment {
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        jsonObjectRequest.setShouldCache(false);
         requestQueue.add(jsonObjectRequest);
     }
 

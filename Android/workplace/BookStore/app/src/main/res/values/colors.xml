@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFFF00FF</color>
     <color name="gray">#333333FF</color>
+    <color name="orderSuccessfully">#eb4c34FF</color>
 </resources>
